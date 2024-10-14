@@ -9,3 +9,6 @@ function register_my_menu() {
         ); 
     } 
     add_action( 'init', 'register_my_menu' );
+
+    //gestion du logo sur le thème
+    add_theme_support( 'custom-logo' );
