@@ -16,9 +16,11 @@ function register_my_menu() {
     // Ajout style CSS et JS
 function ajout_CSS_script() {
     // JS
-    wp_enqueue_script('script', get_template_directory_uri() . '/wp-content/themes/NathalieMota/script.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('script-global', get_template_directory_uri() . '/script.js', array('jquery'), '1.1', true);
     // CSS
     wp_enqueue_style('style', get_stylesheet_uri(), array(), '1.0');
 }
 
 add_action( 'wp_enqueue_scripts', 'ajout_CSS_script' );
+
+wp_enqueue_script('script-global', get_template_directory_uri() . '/script.js', array('jquery'), '1.1', true);

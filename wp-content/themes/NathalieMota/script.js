@@ -1,28 +1,31 @@
-//appeler la modale 
+const modaleContent = document.querySelector('.modale-content');
+const btnContact = document.querySelector('#menu-item-28');
+const btnModale = document.querySelector('.btnModal');
+const modaleBox = document.querySelector('.modale-box');
+const postCta = document.getElementById('js-post-cta');
+// const refPhoto = document.getElementById('ref-photo');
+// const formRefPhoto = document.getElementById('form-ref-photo');
+const formRefPhoto = document.getElementById('form-ref-photo');
+const btnContactMobile = document.getElementsByClassName('contactMobile');
+const btnclose = document.querySelector('.close');
+// Fait apparaitre la modale au clic
+// btnContact.addEventListener('click', openModale);
+// btnModale.addEventListener('click', openModale);
 
-var modal = document.getElementById('myModal');
-
-// appeler le bouton de la modale 
-
-var btn = document.getElementById("myBtn");
-
-
-// cliquer sur le bouton pour ouvrir la modale 
-
-btn.onclick = function() {
-    modal.style.display = "block";
+if (btnContact) {
+    btnContact.addEventListener('click', openModale);
+  }
+  
+function openModale(e) {
+e.preventDefault();
+modaleContent.style.display = "block";
 }
 
-// cliquer sur <span> (x), pour fermer la modale
-
-span.onclick = function() {
-    modal.style.display = "none";
+if (btnclose) {
+  btnclose.addEventListener('click', closeModale);
 }
 
-//cliquer n'importe où pour fermer la modale
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+function closeModale(e) {
+  e.preventDefault();
+  modaleContent.style.display = "none";
+  }
