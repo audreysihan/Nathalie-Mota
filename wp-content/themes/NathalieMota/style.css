@@ -103,25 +103,29 @@ img.custom-logo {
     display: none; /* La modale est cachée par défaut */
     position: fixed; /* Reste en place même lorsqu'on fait défiler */
     z-index: 1; /* Au-dessus du contenu normal */
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
     width: 22%; /* Prend toute la largeur de l'écran */
-    height: 85%; /* Prend toute la hauteur de l'écran */
-  }
-  
-  /* Style du contenu de la modale */
-  .modale-content {
+    transform: translate(-50%,-50%);
+    max-height: 95vh;
+    overflow: auto;
     background-color: white;
-    margin: 15% auto; /* Marge pour centrer verticalement */
     padding: 20px;
     border-radius: 5px;
-    width: 22%; /* Largeur de la modale */
     max-width: 500px; /* Limite la largeur maximale */
-  }
+}
   
   .modale-content.modale-hide {
     border: 4px solid black;
-}
+    }
+
+
+  img#contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    }
 
   /* Bouton de fermeture */
   .close {
@@ -194,4 +198,126 @@ img#hero {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+/*bouton charger plus*/
+
+button#load-more-posts {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;  
+    width: 272px;  /* Largeur du bouton */
+    height: 50px;  /* Hauteur du bouton */
+    background-color: #D8D8D8;
+    color: #000000;  
+    text-decoration: none;  /* Supprime Décoration de texte */
+    border-radius: 2px;  
+    font-weight: bold;  
+    transition: .3s ease-in-out;  /* Transition de 0.3s - accélération/décélération */
+    cursor: pointer;  /* Curseur au survol */
+    font-family: Space Mono;  
+    font-size: 12px;  
+    font-weight: 400;  
+    line-height: 17.77px;  
+    letter-spacing: 0em;  
+    text-align: center;  
+    border: none;  /* Bordure du bouton */
+    margin-top: 20px;  
+}
+
+/* single photo */
+
+h1 {
+    font-size: 66PX;
+    font-family: monospace;
+    font-style: italic;
+    font-weight: 400;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+
+.description_photo {
+    font-size: 14px;
+    font-family: monospace;
+    font-weight: 400;
+}
+
+.texte-contact {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+h3 {
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+/*bouton contact dans single*/
+
+.bouton-contact {
+    display: flex;
+    width: 232px;
+    height: 50px;
+    border-radius: 2px;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+    font-family: Space Mono;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17.77px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+    background-color: #D8D8D8;
+}
+
+button#bouton-contact {
+    width: 232px;
+    height: 50px;
+    font-size: 12px;
+    font-family: monospace;
+    font-weight: 400;
+    border: #D8D8D8;
+}
+
+.zone-de-contact {
+    display: flex;
+    padding-top: 20px;
+}
+
+.texte-contact {
+    display: flex;
+    padding-right: 100px;
+}
+
+.conteneur-gauche {
+    display: flex;
+    padding-inline: 80px;
+    flex-direction: column;
+}
+
+.review__reference, .review__categorie, .review__format, .review__type, .review__annee {
+    padding-bottom: 20px;
+}
+
+/* miniature photo (flèches) */
+
+.conteneur-droit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+img.attachment-full.size-full {
+    width: 81px;
+    height: 71px;
+}
+
+/*flèche dans single*/
+
+a#prev-arrow-link {
+    padding-right: 20px;
 }
