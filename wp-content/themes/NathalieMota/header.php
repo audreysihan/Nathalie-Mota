@@ -7,7 +7,6 @@
     
 </head>
 
-<body>
     
 <div id="nav">
     <div id="logo">
@@ -32,3 +31,4 @@ wp_nav_menu( array(
 </div>
 
 
+<body>

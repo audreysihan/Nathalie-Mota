@@ -7,46 +7,79 @@ while(have_posts()):
 
 
 <div class="conteneur-gauche">
-    <h1> <?php the_title(); ?> </h1>
-        
-        <div class="description_photo">
-            <div class="review__reference">Référence: <?php the_field( 'reference' ); ?></div>
-            <div class="review__categorie">Catégorie: <?php the_field( 'categorie' ); ?></div>
-            <div class="review__format">Format: <?php the_field( 'format' ); ?></div>
-            <div class="review__type">Type: <?php the_field( 'type' ); ?></div>
-            <div class="review__annee">Année: <?php the_field( 'annee' ); ?></div>
+    <h1 class="titre"> <?php the_title(); ?> </h1>
+            <div class="description_photo">
+                <div class="reference">REFERENCE: <?php the_field('reference'); ?></div>
+                
+         <div class="categorie">
+            CATEGORIE:
+            <?php
+            // Récupère les termes de la taxonomie 'categorie' pour le post actuel
+            $categories = get_the_terms(get_the_ID(), 'categorie');
+            if (!empty($categories) && !is_wp_error($categories)) {
+                $categorie_names = wp_list_pluck($categories, 'name');
+                echo implode(', ', $categorie_names); // Affiche les noms des catégories, séparés par des virgules
+            } else {
+                echo 'Non spécifié';
+            }
+            ?>
         </div>
-            
-    <hr style="border: 1px solid #000; width: 50%;">
-        
-<div class="zone-de-contact">
+
+        <div class="format">
+            FORMAT:
+            <?php
+            // Récupère les termes de la taxonomie 'formats' pour le post actuel
+            $formats = get_the_terms(get_the_ID(), 'formats');
+            if (!empty($formats) && !is_wp_error($formats)) {
+                $format_names = wp_list_pluck($formats, 'name');
+                echo implode(', ', $format_names); // Affiche les noms des formats, séparés par des virgules
+            } else {
+                echo 'Non spécifié';
+            }
+            ?>
+    </div>
+
+        <div class="type">TYPE: <?php the_field('type'); ?></div>
+            <?php the_date(); ?> 
+        </div>
+
+        </div>
+       
+        <?php
+        $image_id = get_field('image'); // On récupère cette fois l'ID
+
+        if ($image_id) {
+            echo wp_get_attachment_image($image_id, 'full');
+           echo "<img src=\"$image_id\" class=\"imagemariée\" alt=\"\">";
+
+        }
+        ?>
+
+    <div class="barre">
+            <hr>
+    </div>
+
+     
+
+    <div class="zone-de-contact">
+
+        <div class="texte-contact">
+            <p>Cette photo vous intéresse ?</p>
+        </div>
+
+        <!-- Bouton Contact -->
+         <div class="bouton-contact">
+  <button type="button" class="bouton" data-bs-toggle="modal" data-bs-target="#videoModal">
+                Contact
+            </button>
+    </div>
+
     
-    <div class="texte-contact">
-        <p>Cette photo vous intéresse ?</p>
-    </div>
 
-    <div class="bouton-contact">
-            <button id="bouton-contact">Contact</button>
-        
-                <?php include get_template_directory() . '/template-parts/modale.php'; ?>
+    <div class="miniature">
 
-                <?php
-                // Récupère la valeur du champ personnalisé 'reference_photo' et la définit comme une variable JavaScript.
-                $reference_photo = get_field('reference_photo');
-                if ($reference_photo) {
-                    echo '<script type="text/javascript">';
-                    echo 'var acfReferencePhoto = "' . esc_js($reference_photo) . '";';
-                    echo '</script>';
-                }
-                ?>
-            
-    </div>
-</div>
-</div>
-
-<div class="conteneur-droit">
 <?php if (has_post_thumbnail()) : ?>
-                <a data-href="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(), 'large')[0]; ?>" class="photo">
+                <a data-href="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(), 'large')[0]; ?>" class="miniature">
                     <?php the_post_thumbnail(); ?>
                 </a>
                 <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Fullscreen icon -->
@@ -57,10 +90,10 @@ while(have_posts()):
             <?php 
 	$image_id = get_field( 'image' ); // On récupère cette fois l'ID
 	if( $image_id ) {	
-		echo wp_get_attachment_image( $image_id, 'full' );
+		echo wp_get_attachment_image( $image_id, 'thumbnail' );
     }
     ?>
-            </div>
+            <div class="fleches">
                 <a href="<?php echo esc_url($prev_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($prev_post, 'thumbnail')); ?>" id="prev-arrow-link">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/fleche-gauche.png" alt="Précédent" class="arrow-img-gauche" id="prev-arrow" />
                 </a>
@@ -68,9 +101,15 @@ while(have_posts()):
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/fleche-droite.png" alt="Suivant" class="arrow-img-droite" id="next-arrow" />
                 </a>
             </div>
+            </div>
+    </div>
     </div>
 
-      <hr style="border: 1px solid #000;">
+</div>
+
+    <div class="barre2">
+            <hr>
+        </div>
 
      <!-- Section Photos Apparentées -->
      <div class="related-images">

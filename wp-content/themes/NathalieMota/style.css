@@ -49,6 +49,10 @@ body{
     font-family: 'Space Mono', monospace;
 }
 
+main{
+    padding-inline: 80px;
+}
+
 /*navigation*/
 
 div#nav {
@@ -199,6 +203,9 @@ img#hero {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+/* page d'accueil */
+
+
 
 /*bouton charger plus*/
 
@@ -255,6 +262,27 @@ h3 {
     font-weight: 400;
 }
 
+.barre {
+    width: 50%;
+    padding-left: 80px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid black;
+}
+
+.barre2 {
+    padding-inline: 80px;
+    padding-top: 30px;
+}
+
+/* grande photo*/
+
+img.attachment-full.size-full {
+    width: 563px;
+    height: 844px;
+}
 
 /*bouton contact dans single*/
 
@@ -275,7 +303,7 @@ h3 {
     background-color: #D8D8D8;
 }
 
-button#bouton-contact {
+button.bouton {
     width: 232px;
     height: 50px;
     font-size: 12px;
@@ -287,6 +315,9 @@ button#bouton-contact {
 .zone-de-contact {
     display: flex;
     padding-top: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+    justify-content: space-between;
 }
 
 .texte-contact {
@@ -306,12 +337,16 @@ button#bouton-contact {
 
 /* miniature photo (flèches) */
 
-.conteneur-droit {
+.miniature{
     display: flex;
     justify-content: flex-end;
+    padding-left: 700px;
+    width: 81px; 
+    height: 71px; 
 }
 
-img.attachment-full.size-full {
+
+img.attachment-thumbnail.size-thumbnail {
     width: 81px;
     height: 71px;
 }

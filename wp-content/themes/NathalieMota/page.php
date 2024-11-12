@@ -62,7 +62,7 @@ wp_reset_postdata(); // Réinitialiser | Données de publication à leur état d
 
 <!-- Section | Bloc de photos -->
 <div id="photo-container">
-<?php include get_template_directory() . '/bureau/word press/nathalie-mota/app/public/wp-content/themes/NathalieMota/template-parts/photo-block.php'; ?>
+    <?php include get_template_directory() . '/template-parts/photo_block.php'; ?>
 </div>
 
 <?
