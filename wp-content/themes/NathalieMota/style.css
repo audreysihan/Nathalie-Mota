@@ -59,6 +59,7 @@ div#nav {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    box-shadow: 0px 3px 0px 0px rgba(0.5, 0.5, 0.5, 0.02);
 }
 
 div#menu {
@@ -79,12 +80,12 @@ li#menu-item-30 {
     margin-right: 50px;
 }
 
-li#menu-item-29 {
+li#menu-item-105 {
     margin-right: 50px;
 }
 
 li#menu-item-28 {
-    margin-right: 250px;
+    margin-right: 50px;
 }
 
 a {
@@ -177,6 +178,7 @@ li#menu-item-41 {
     font-size: 16px;
 }
 
+/*----------------page d'accueil-----------*/
 
 /*hero*/
 
@@ -203,7 +205,54 @@ img#hero {
     transform: translate(-50%, -50%);
     text-align: center;
 }
-/* page d'accueil */
+
+select#category-filter  {
+    font-family: poppins;
+    font-size: 12px;
+    font-weight: 400;
+    width: 260px;
+    height: 43px;
+    margin-right: 40px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+select#format-filter {
+    font-family: poppins;
+    font-size: 12px;
+    font-weight: 400;
+    width: 260px;
+    height: 43px;
+    margin-right: 500px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+select#date{
+    font-family: poppins;
+    font-size: 12px;
+    font-weight: 400;
+    width: 260px;
+    height: 43px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+.filters-and-sort {
+    display: flex;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+
+.view-all-button {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
 
 
@@ -232,7 +281,18 @@ button#load-more-posts {
     margin-top: 20px;  
 }
 
-/* single photo */
+/*------------ single photo------------- */
+
+.containeur {
+    display: flex;
+    gap: 20px; /* Espace entre les colonnes */
+    padding-top: 50px;
+}
+    
+.colonne {        
+    flex: 1; /* Chaque colonne prend 50% de l'espace */
+    padding: 10px;
+}
 
 h1 {
     font-size: 66PX;
@@ -248,6 +308,10 @@ h1 {
     font-size: 14px;
     font-family: monospace;
     font-weight: 400;
+    display: flex;
+    padding-left: 80px;
+    flex-direction: column;
+    margin-top: 50px;
 }
 
 .texte-contact {
@@ -260,11 +324,15 @@ h3 {
     font-family: monospace;
     font-size: 18px;
     font-weight: 400;
+    padding-left: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .barre {
     width: 50%;
     padding-left: 80px;
+    margin-top: -25px;
 }
 
 hr {
@@ -275,13 +343,15 @@ hr {
 .barre2 {
     padding-inline: 80px;
     padding-top: 30px;
+    margin-top: -20px;
 }
 
 /* grande photo*/
 
 img.attachment-full.size-full {
     width: 563px;
-    height: 844px;
+    height: auto;
+    padding-left: 90px;
 }
 
 /*bouton contact dans single*/
@@ -328,7 +398,6 @@ button.bouton {
 .conteneur-gauche {
     display: flex;
     padding-inline: 80px;
-    flex-direction: column;
 }
 
 .review__reference, .review__categorie, .review__format, .review__type, .review__annee {
@@ -351,8 +420,27 @@ img.attachment-thumbnail.size-thumbnail {
     height: 71px;
 }
 
+.thumbnail-container {
+    display: flex;
+    margin-top: -20px;
+}
+
 /*flèche dans single*/
 
 a#prev-arrow-link {
     padding-right: 20px;
+}
+
+/*vous aimerez aussi*/
+
+img.attachment-full.size-full {
+    width: 563px;
+    height: auto;
+    margin-right: -80px;
+}
+
+.image-container {
+    display: flex;
+    padding-left: 100px;
+    padding-bottom: 50px;
 }

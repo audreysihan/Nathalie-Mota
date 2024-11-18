@@ -1,5 +1,5 @@
 </main>
-</body>
+
 
 <footer class="site__footer">
     
@@ -20,5 +20,5 @@ get_template_part("template-parts/modale");
 
 <?php wp_footer();?>
 
-
+</body>
 </html>

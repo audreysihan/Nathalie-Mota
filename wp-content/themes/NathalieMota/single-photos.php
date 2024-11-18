@@ -5,19 +5,25 @@ while(have_posts()):
 ?>
 
 
-
-<div class="conteneur-gauche">
+<div class="containeur">
+<div class="colonne">
+    <div class="description_photo">
+    
     <h1 class="titre"> <?php the_title(); ?> </h1>
-            <div class="description_photo">
-                <div class="reference">REFERENCE: <?php the_field('reference'); ?></div>
+            
+            <div class="reference">REFERENCE: <?php the_field('reference'); ?></div>
                 
          <div class="categorie">
-            CATEGORIE:
+            CATEGORIE: 
+            <?php the_field("categorie");
+            ?>
             <?php
             // Récupère les termes de la taxonomie 'categorie' pour le post actuel
             $categories = get_the_terms(get_the_ID(), 'categorie');
+            $slug = [];
             if (!empty($categories) && !is_wp_error($categories)) {
                 $categorie_names = wp_list_pluck($categories, 'name');
+            $slug = wp_list_pluck($categories,"slug");
                 echo implode(', ', $categorie_names); // Affiche les noms des catégories, séparés par des virgules
             } else {
                 echo 'Non spécifié';
@@ -26,10 +32,10 @@ while(have_posts()):
         </div>
 
         <div class="format">
-            FORMAT:
+            FORMAT:     
             <?php
             // Récupère les termes de la taxonomie 'formats' pour le post actuel
-            $formats = get_the_terms(get_the_ID(), 'formats');
+            $formats = get_the_terms(get_the_ID(), 'format');
             if (!empty($formats) && !is_wp_error($formats)) {
                 $format_names = wp_list_pluck($formats, 'name');
                 echo implode(', ', $format_names); // Affiche les noms des formats, séparés par des virgules
@@ -37,14 +43,31 @@ while(have_posts()):
                 echo 'Non spécifié';
             }
             ?>
-    </div>
+         </div>
 
-        <div class="type">TYPE: <?php the_field('type'); ?></div>
-            <?php the_date(); ?> 
+        <div class="type">
+            TYPE: 
+            <?php
+            // Récupère les termes de la taxonomie 'categorie' pour le post actuel
+            $types = get_the_terms(get_the_ID(), 'type_photo');
+            if (!empty($types) && !is_wp_error($types)) {
+                $type_names = wp_list_pluck($types, 'name');
+                echo implode(', ', $type_names); // Affiche les noms des catégories, séparés par des virgules
+            } else {
+                echo 'Non spécifié';
+            }
+            ?>
         </div>
 
+        <div class="annee">
+            ANNEE:
+            <?php the_date("Y"); ?> 
         </div>
+
+     </div>
+</div>
        
+        <div class="colonne">
         <?php
         $image_id = get_field('image'); // On récupère cette fois l'ID
 
@@ -54,14 +77,14 @@ while(have_posts()):
 
         }
         ?>
+        </div>
+</div>
 
-    <div class="barre">
+        <div class="barre">
             <hr>
-    </div>
+        </div>
 
-     
-
-    <div class="zone-de-contact">
+<div class="zone-de-contact">
 
         <div class="texte-contact">
             <p>Cette photo vous intéresse ?</p>
@@ -93,17 +116,36 @@ while(have_posts()):
 		echo wp_get_attachment_image( $image_id, 'thumbnail' );
     }
     ?>
-            <div class="fleches">
-                <a href="<?php echo esc_url($prev_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($prev_post, 'thumbnail')); ?>" id="prev-arrow-link">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/fleche-gauche.png" alt="Précédent" class="arrow-img-gauche" id="prev-arrow" />
-                </a>
-                <a href="<?php echo esc_url($next_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($next_post, 'thumbnail')); ?>" id="next-arrow-link">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/fleche-droite.png" alt="Suivant" class="arrow-img-droite" id="next-arrow" />
-                </a>
-            </div>
-            </div>
+
+<?php
+// Récupérer les articles précédent et suivant
+$prev_post = get_previous_post();
+$next_post = get_next_post();
+?>
+
+<div class="fleches">
+    <?php if ($prev_post): ?>
+        <a href="<?php echo get_permalink($prev_post->ID); ?>" class="arrow-link" id="prev-arrow-link">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/fleche-gauche.png">
+        </a>
+    <?php else: ?>
+        <!-- Si aucun article précédent -->
+        <span class="arrow-disabled" id="prev-arrow-link">Aucun</span>
+    <?php endif; ?>
+
+    <?php if ($next_post): ?>
+        <a href="<?php echo get_permalink($next_post->ID); ?>" class="arrow-link" id="next-arrow-link">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/fleche-droite.png" alt="Suivant">
+        </a>
+    <?php else: ?>
+        <!-- Si aucun article suivant -->
+        <span class="arrow-disabled" id="next-arrow-link">Aucun</span>
+    <?php endif; ?>
+</div>
+
     </div>
     </div>
+</div>
 
 </div>
 
@@ -115,20 +157,20 @@ while(have_posts()):
      <div class="related-images">
         <h3>VOUS AIMEREZ AUSSI</h3>
         
+        
         <div class="image-container">
-            
             <?php
             
             // Récupère deux photos aléatoires de la même catégorie que la photo actuelle.
             $args_related_photos = array(
-                'post_type' => 'photo',
+                'post_type' => 'photos',
                 'posts_per_page' => 2,
                 'orderby' => 'rand',
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'categorie',
                         'field' => 'slug',
-                        'terms' => $current_category_slugs, // Utilise le slug de la catégorie de la photo actuelle
+                        'terms' => $slug, // Utilise le slug de la catégorie de la photo actuelle
                     ),
                 ),
             );
@@ -137,59 +179,29 @@ while(have_posts()):
 
             while ($related_photos_query->have_posts()) :
                 $related_photos_query->the_post();
+
+        $image_id = get_field('image'); // On récupère cette fois l'ID
+
+        if ($image_id) {
+            echo wp_get_attachment_image($image_id, 'full');
+           echo "<img src=\"$image_id\" class=\"imagemariée\" alt=\"\">";
+
+        }
             endwhile;
             ?>
         
-
+        </div>
                 <div class="related-image">
                     <a href="<?php the_permalink(); ?>">
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="image-wrapper">
                         <? endif ;?>
                         <?php the_post_thumbnail(); ?>
+                </div>
 
-        
+    
                                 
-        <!-- Section | Overlay Catalogue -->
-            <div class="thumbnail-overlay-single">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/icon_eye.png" alt="Icône de l'œil"> <!-- Icône de l'œil | Information Photo -->
-            <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Icône plein écran -->
-            
-            <?php
-            
-            // Récupère la référence et la catégorie de l'image associée.
-            $related_reference_photo = get_field('reference_photo');
-            $related_categories = get_the_terms(get_the_ID(), 'categorie');
-            $related_category_names = array();
-
-                if ($related_categories) {
-                    foreach ($related_categories as $category) {
-                         $related_category_names[] = esc_html($category->name);
-                            }
-                        }
-
-            ?>
-                                    
-        <div class="photo-info">
-            <div class="photo-info-left">
-                <p><?php echo esc_html($related_reference_photo); ?></p>
-            </div>
-            <div class="photo-info-right">
-            <p><?php echo implode(', ', $related_category_names); ?></p>
-            </div>
-        </div>       
-
-        <?php wp_reset_postdata(); // Restaure les données originales des publications ?>
-        </div>
-
-        <!-- Ajouter un bouton pour la page d'accueil -->
-        <div class="home-button">
-            <a href="<?php echo home_url(); ?>" class="button">Toutes les photos</a>
-        </div>
-    </div>
-
-    <script src="<?php echo get_template_directory_uri(); ?>/wp-content/NathalieMota/script.js"></script>
-        
+       
           
     <?php
     endwhile;

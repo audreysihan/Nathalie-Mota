@@ -7,7 +7,7 @@
     
 </head>
 
-    
+<body>
 <div id="nav">
     <div id="logo">
 
@@ -25,10 +25,3 @@ wp_nav_menu( array(
 </div>
 </div>
 
-<div id="hero">
-    <img src="/wp-content/uploads/2024/10/nathalie-11-scaled.jpeg" alt="image d'un groupe de personnes à une fête" id="hero">
-    <h1 class="hero-header__page-title">Photographe Event</h1>
-</div>
-
-
-<body>
